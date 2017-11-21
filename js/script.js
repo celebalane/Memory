@@ -1,6 +1,7 @@
 var dos = 'img/verso.svg';
 var clic=0;
 var paires = 0;
+var nbPairesTotal;
 var choixun;
 var choixdeux;
 var norepeat = true; //empeche le chrono de se repeter
@@ -10,7 +11,8 @@ var norepeat = true; //empeche le chrono de se repeter
 ///////////////////////////////////////// Affichage des cartes ////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
- function choisir(carte) { // Choix des cartes quand l'utilisateur clique
+ function choisir(carte, nbPaires) { // Choix des cartes quand l'utilisateur clique
+ 	nbPairesTotal = nbPaires;
 	if (norepeat == true){ // Empêche le chronomètre de se répéter
 		timerID = setInterval("chrono()", 1000); //on appelle la fonction chronometre
 		norepeat = false;
@@ -54,8 +56,12 @@ function verif() { // Vérifie si une paire a été faite
 	}	
 }
 
-function relance () {
-	document.location.href="./index.php";
+function relance (niveau) {
+	if(niveau===""){
+		document.location.href="./index.php";
+	}else{
+		document.location.href="./niveau"+niveau+".php";
+	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////// Chronomètre ////////////////////////////////////////////////////////////////
@@ -63,22 +69,34 @@ function relance () {
 
 var timerID = 0;
 var sec = 30;
-var min = 0; 
+var min = "00"; 
 
 function chrono(){ 
-	if(sec<=30 && sec>0){
-		sec--;
-		if(sec<10){
-			sec = "0" +sec; //affiche 0 avant le chiffre 1
+	if(nbPairesTotal ==="4"){
+		if(sec<=30 && sec>0){
+			sec--;
+			if(sec<10){
+				sec = "0" +sec; //affiche 0 avant le chiffre 1
+			}
+			if(paires == 4){
+				scoreSeconde = 30 - sec;
+				document.location.href="./index.php?min=" + min + "&sec="+scoreSeconde; //Redirection avec affichage du temps
+			}
+		}else if(sec == 0){
+				document.location.href="./index.php?perdu";
 		}
-		if(paires == 4){
-			document.location.href="./index.php?min=" + min + "&sec=" +sec; //Redirection au debut du jeu en recuperant le nom et le score
-		}
-	}else if(sec == 0){
-		if((sec == 0) && paires==4){
-			document.location.href="./index.php?min=" + min + "&sec=" +sec; 
-		}else if((sec == 0)&&(paires !== 4)){
-			document.location.href="./index.php?perdu";
+	}else if(nbPairesTotal === "6"){
+		if(sec<=30 && sec>0){
+			sec--;
+			if(sec<10){
+				sec = "0" +sec;
+			}
+			if(paires == 6){
+				scoreSeconde = 30 - sec;
+				document.location.href="./niveau2.php?min=" + min + "&sec="+scoreSeconde;
+			}
+		}else{
+				document.location.href="./niveau2.php?perdu";
 		}
 	}
 	document.getElementById("chronotime").innerHTML = min + ":" + sec +""; //afiche le chronometre 

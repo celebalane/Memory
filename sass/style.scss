@@ -4,11 +4,11 @@
 }
 
 html{
-	height: 100%;
+	max-height: 100%;
 }
 body{
 	max-width: 100%;
-	height: 100%;
+	max-height: 100%;
 	background-color: #CFE8E7;
 	p{
 		font-family: "riffic-bold";
@@ -35,6 +35,14 @@ section{
 		color: black;
 		font-family: "riffic-bold";
 	}
+	#niveau2{
+		.col-lg-3{
+			height: 150px !important;
+		}
+		.illu2{
+			height: 100%;
+		}
+	}
 }
 
 footer{
@@ -48,7 +56,7 @@ footer{
 ///////////////////////////////////////// Tablette /////////////////////////////////////////////
 @media screen and (min-width: 768px) and (max-width: 1024px) and (orientation:portrait){ /*Tablette orientée portrait*/
  section{
- 	img{
+ 	.illu{
  		width: 60% !important;
  	}
  }

@@ -1,5 +1,5 @@
 <?php
-	$tab = array("img/araignee.svg", "img/araignee.svg", "img/cochon.svg", "img/cochon.svg", "img/flamand", "img/flamand", "img/mouton", "img/mouton");
+	$tab = array("img/araignee.svg", "img/araignee.svg", "img/cochon.svg", "img/cochon.svg", "img/flamand", "img/flamand", "img/mouton", "img/mouton", "img/baleine", "img/baleine", "img/taupe.svg", "img/taupe.svg");
 	$dos = 'img/verso.svg';
 	$etat='jeu';
 	shuffle($tab); 
@@ -31,7 +31,7 @@
 		<?php                                   
 			foreach ($tab as $index => $case) {               
 				echo '"'. $case . '"';                        
-				if ($index != 7){                        
+				if ($index != 11){                        
 					echo ',';                           
 				}
 			}
@@ -56,21 +56,20 @@
 					<div class="alert alert-light col-md-7 text-center">
 						<h1 id="victoire">BRAVO !</h1>
 						<p>Ton temps est de <?= $min; ?> min et <?= $sec; ?> sec</p>
-						<button type="button" class="btn btn-info" onclick="relance('')">Rejouer</button>
-						<a href="niveau2.php" role="button" class="btn btn-info">Niveau suivant</a>
+						<button type="button" class="btn btn-info" onclick="relance(2)">Rejouer</button>
 					</div>
 				<?php elseif($etat==='perdu'): ?>
 					<div class="alert alert-light col-md-7 text-center">
 						<h1 id="victoire">Dommage :(</h1>
 						<p>Tu n'as pas trouvé les paires à temps<br>Patapon te propose un nouvel essai, veux tu rejouer?</p>
-						<button type="button" class="btn btn-info" onclick="relance('')">Rejouer</button>
+						<button type="button" class="btn btn-info" onclick="relance(2)">Rejouer</button>
 					</div>
 				<?php else: ?>
-					<div class="col-md-8">
+					<div class="col-lg-8 col-md-8" id="niveau2">
 						<div class="row">
 							<?php for($i=0; $i<=count($tab) -1 ; $i++): ?>
-								<div class="col-lg-3 col-md-6 text-center">
-									<img src="<?= $dos; ?>" class='illu2 img-fluid' onclick='choisir("<?= $i; ?>","4")' draggable='false' />
+								<div class="col-lg-3 col-md-4 text-center">
+									<img src="<?= $dos; ?>" class='illu2 img-fluid' onclick='choisir("<?= $i; ?>","6")' draggable='false' />
 								</div>
 							<?php endfor; ?>
 						</div>
